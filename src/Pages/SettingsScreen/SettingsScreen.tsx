@@ -11,6 +11,7 @@ import {Header} from '../../Components';
 import MinLogo from '../../Icons/MinLogo';
 import BackIcon from '../../Icons/BackIcon';
 import {settingsStyles} from './settingsStyles';
+import ChangeLanguage from '../../Components/ChangeLanguage/ChangeLanguage';
 
 function SettingsScreen() {
   const navigation = useNavigation();
@@ -30,11 +31,7 @@ function SettingsScreen() {
         }
       />
       <View style={settingsStyles.container}>
-        <TouchableOpacity
-          style={{backgroundColor: 'red'}}
-          onPress={() => navigation.navigate('Chat' as never)}>
-          <Text>Settings</Text>
-        </TouchableOpacity>
+        <ChangeLanguage />
       </View>
     </SafeAreaView>
   );
