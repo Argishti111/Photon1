@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, Dimensions, SafeAreaView} from 'react-native';
 import React from 'react';
 
 type HeaderType = {
@@ -15,7 +15,7 @@ export default function Header({
   rightIcon,
 }: HeaderType) {
   return (
-    <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.headerContainer}>
       <View style={styles.bodyContainer}>
         <View>{leftIcon}</View>
         <View style={styles.titleContainer}>
@@ -23,7 +23,7 @@ export default function Header({
         </View>
         <View>{rightIcon}</View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: Dimensions.get('window').width,
-    height: 70,
+    minHeight: 70,
     zIndex: 1000,
-    paddingHorizontal: 16,
   },
   bodyContainer: {
     flex: 1,
@@ -45,6 +44,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: 'solid',
     borderBottomColor: '#6D6D6D',
+    marginHorizontal:20,
+    paddingVertical: 16
   },
   titleContainer: {
     flex: 1,

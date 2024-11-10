@@ -6,12 +6,12 @@ type ExampleMessagesType = {
 };
 
 export default function ExampleMessage({messages}: ExampleMessagesType) {
-  console.log(messages); // Print the messages array to the console for debugging);
+  // console.log(messages); // Print the messages array to the console for debugging);
 
   return (
     <View>
       {messages.map((message, index) => (
-        <Text key={index}>{message}</Text>
+        <Text key={index}>{message.messageTitle}</Text>
       ))}
       <Text>ExampleMessage</Text>
     </View>

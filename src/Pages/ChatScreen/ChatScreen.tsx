@@ -2,12 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  TextInput,
-  Button,
   StyleSheet,
-  ActivityIndicator,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import {ExampleMessage, Header} from '../../Components';
 import SettingsIcon from '../../Icons/SettingsIcon';
@@ -15,65 +11,91 @@ import MinLogo from '../../Icons/MinLogo';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {exampleMessages} from '../../data/data';
-
-const API_TOKEN = 'PXf6n09PH9oNjW16VZ5Dww6bLO';
-const API_BASE_URL = 'https://api.photonchatai.cloud';
+import WebView from 'react-native-webview';
+import {TextInput, IconButton} from 'react-native-paper';
 
 export default function ChatScreen() {
   const navigation = useNavigation();
 
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
-  const [isChatReady, setIsChatReady] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([{question:'', answer: ''}]);
+  const [inputText, setInputText] = useState('');
+  const [connectResult, setConnectResult] = useState();
 
-  useEffect(() => {
-    checkChatReady();
-  }, []);
+  const connectToChat = ()=> {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', 'Bearer PXf6n09PH9oNjW16VZ5Dww6bLO');
 
-  const checkChatReady = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/connect`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${API_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({question: 'Is the chat ready?'}),
-      });
-      const data = await response.json();
-      setIsChatReady(data.message === 'Chat is ready!');
-    } catch (error) {
-      console.error('Error checking chat status:', error);
-    }
+    const raw = JSON.stringify({
+      'question': 'Is the chat ready?',
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    // @ts-ignore
+    fetch('https://api.photonchatai.cloud/connect', requestOptions)
+        .then((response) => response.json())
+        .then((result) => setConnectResult(result))
+        .catch((error) => console.error(error));
   };
 
-  // const sendQuestion = async () => {
-  //   if (!isChatReady) {
-  //     Alert.alert('Chat is not ready yet.');
-  //     return;
-  //   }
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch(`${API_BASE_URL}/ask`, {
-  //       method: 'POST',
-  //       headers: {
-  //         Authorization: `Bearer ${API_TOKEN}`,
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({question}),
-  //     });
-  //     const data = await response.json();
-  //     setAnswer(data.answer || data.message);
-  //   } catch (error) {
-  //     console.error('Error fetching answer:', error);
-  //     setAnswer('An error occurred. Please try again later.');
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+
+  useEffect(()=>{
+    connectToChat();
+  },[]);
+
+
+  const sendMessage = () => {
+    if (inputText.trim()) {
+
+      setInputText('');
+
+    }
+
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', 'Bearer PXf6n09PH9oNjW16VZ5Dww6bLO');
+
+    const raw = JSON.stringify({
+      'question': inputText.trim(),
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    // @ts-ignore
+    fetch('https://api.photonchatai.cloud/ask', requestOptions)
+        .then((response) => {
+          response.json()
+        })
+        .then((result) => {
+          setMessages([...messages, {
+            question: inputText,
+            answer: '',
+          }, {
+            question: '',
+            answer: result.answer,
+          }]);
+        })
+        .catch((error) => console.error(error));
+  };
+
+
   const handleClickSettings = () => navigation.navigate('Settings' as never);
 
+
+
+
+  // @ts-ignore
   return (
     <SafeAreaView style={styles.container}>
       <Header
@@ -94,6 +116,57 @@ export default function ChatScreen() {
       />
 
       <ExampleMessage messages={exampleMessages} />
+      {connectResult?.url ? <WebView
+              source={{ uri: connectResult?.url, cache: false }}
+              startInLoadingState
+              cacheEnabled={false}
+          /> :
+          <View
+          >
+            {messages.map((item, index) => (
+                <View
+                    key={index}
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: item.question !== '' ? 'flex-end' : 'flex-start',
+                      padding: 10,
+                      marginVertical: 5,
+                    }}
+                >
+                  <Text style={{
+                    backgroundColor: item.question !== '' ? '#007AFF' : '#E8E8E8',
+                    color: item.question !== '' ? 'white' : 'black',
+                    padding: 10,
+                    borderRadius: 15,
+                    maxWidth: '80%',
+                  }}>
+                    {item.question !== '' ? item.question : item.answer}
+                  </Text>
+                </View>
+            ))}
+
+            <SafeAreaView style={{flex: 1, justifyContent: 'flex-end'}}>
+              <View style={{paddingBottom: 10}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <TextInput
+                      mode="outlined"
+                      placeholder="Type something"
+                      style={{flex: 1}}
+                      outlineStyle={{borderRadius: 25}}
+                      value={inputText}
+                      onChangeText={setInputText}
+                      onSubmitEditing={sendMessage}
+                      returnKeyType="send"
+                  />
+                  <IconButton
+                      icon="send"
+                      size={24}
+                      onPress={sendMessage}
+                  />
+                </View>
+              </View>
+            </SafeAreaView>
+          </View>}
     </SafeAreaView>
   );
 }

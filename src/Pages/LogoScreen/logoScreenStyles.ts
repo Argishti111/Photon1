@@ -14,8 +14,6 @@ export const logoScreenStyles = StyleSheet.create({
   },
   linearContainer: {
     width: 150,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
     borderRadius: 100,
     backgroundColor: '#4c63ff',
     justifyContent: 'center',
@@ -23,6 +21,8 @@ export const logoScreenStyles = StyleSheet.create({
     marginBottom: 15,
   },
   title: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     textAlign: 'center',
     fontSize: 14,
     fontWeight: '400',
@@ -46,9 +46,10 @@ export const logoScreenStyles = StyleSheet.create({
   startedBtnLinearContainer: {
     width: '80%',
     borderRadius: 12,
-    paddingVertical: 10,
+
   },
   getStartedBtnText: {
+    paddingVertical: 10,
     // backgroundColor: 'red',
     // width: 100,
     fontSize: 18,

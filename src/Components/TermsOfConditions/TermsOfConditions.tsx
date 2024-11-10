@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default function TermsAndPrivacyPolicy() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.bodyContainer}>
         <TouchableOpacity style={{width: 100}} onPress={() => {}}>
           <Text style={styles.items}>Terms of use </Text>
@@ -15,7 +15,7 @@ export default function TermsAndPrivacyPolicy() {
           <Text style={styles.items}>Privacy policy </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
