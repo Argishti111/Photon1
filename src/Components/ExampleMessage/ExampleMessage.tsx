@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 
 type ExampleMessagesType = {
@@ -11,9 +11,14 @@ export default function ExampleMessage({messages}: ExampleMessagesType) {
   return (
     <View>
       {messages.map((message, index) => (
-        <Text key={index}>{message}</Text>
+        <View>
+          <Text key={message.id}>{message.messageTitle}</Text>
+          {message.messageLogo}
+        </View>
       ))}
       <Text>ExampleMessage</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({});

@@ -1,5 +1,6 @@
-import LightningIcon from '../Icons/LightningIcon';
 import SunIcon from '../Icons/SunIcon';
+import LimitationsIcon from '../Icons/LimitationsIcon';
+import LightningIcon from '../Icons/LightningIcon';
 
 export const exampleMessages = [
   {
@@ -23,7 +24,7 @@ export const exampleMessages = [
   {
     id: 3,
     messageTitle: 'How are you?',
-    messageLogo: <SunIcon />,
+    messageLogo: <LimitationsIcon />,
     messages: [
       {id: 5, message: 'I am doing well!'},
       {id: 6, message: 'Thank you for asking'},
