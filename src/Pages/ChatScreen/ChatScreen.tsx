@@ -1,33 +1,27 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import {ExampleMessage, Header} from '../../Components';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {ExampleMessage, Header, InputField} from '../../Components';
 import SettingsIcon from '../../Icons/SettingsIcon';
 import MinLogo from '../../Icons/MinLogo';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {exampleMessages} from '../../data/data';
 import WebView from 'react-native-webview';
-import {TextInput, IconButton} from 'react-native-paper';
 
 export default function ChatScreen() {
   const navigation = useNavigation();
 
-  const [messages, setMessages] = useState([{question:'', answer: ''}]);
+  const [messages, setMessages] = useState([{question: '', answer: ''}]);
   const [inputText, setInputText] = useState('');
-  const [connectResult, setConnectResult] = useState();
+  const [connectResult, setConnectResult] = useState<any>();
 
-  const connectToChat = ()=> {
+  const connectToChat = () => {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     myHeaders.append('Authorization', 'Bearer PXf6n09PH9oNjW16VZ5Dww6bLO');
 
     const raw = JSON.stringify({
-      'question': 'Is the chat ready?',
+      question: 'Is the chat ready?',
     });
 
     const requestOptions = {
@@ -39,22 +33,18 @@ export default function ChatScreen() {
 
     // @ts-ignore
     fetch('https://api.photonchatai.cloud/connect', requestOptions)
-        .then((response) => response.json())
-        .then((result) => setConnectResult(result))
-        .catch((error) => console.error(error));
+      .then(response => response.json())
+      .then(result => setConnectResult(result))
+      .catch(error => console.error(error));
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     connectToChat();
-  },[]);
-
+  }, []);
 
   const sendMessage = () => {
     if (inputText.trim()) {
-
       setInputText('');
-
     }
 
     const myHeaders = new Headers();
@@ -62,7 +52,7 @@ export default function ChatScreen() {
     myHeaders.append('Authorization', 'Bearer PXf6n09PH9oNjW16VZ5Dww6bLO');
 
     const raw = JSON.stringify({
-      'question': inputText.trim(),
+      question: inputText.trim(),
     });
 
     const requestOptions = {
@@ -74,26 +64,28 @@ export default function ChatScreen() {
 
     // @ts-ignore
     fetch('https://api.photonchatai.cloud/ask', requestOptions)
-        .then((response) => {
-          response.json()
-        })
-        .then((result) => {
-          setMessages([...messages, {
+      .then(response => {
+        response.json();
+      })
+      .then(result => {
+        console.log(result, '<<<');
+
+        setMessages([
+          ...messages,
+          {
             question: inputText,
             answer: '',
-          }, {
+          },
+          {
             question: '',
-            answer: result.answer,
-          }]);
-        })
-        .catch((error) => console.error(error));
+            answer: 'fs',
+          },
+        ]);
+      })
+      .catch(error => console.error(error));
   };
 
-
   const handleClickSettings = () => navigation.navigate('Settings' as never);
-
-
-
 
   // @ts-ignore
   return (
@@ -116,57 +108,63 @@ export default function ChatScreen() {
       />
 
       <ExampleMessage messages={exampleMessages} />
-      {connectResult?.url ? <WebView
-              source={{ uri: connectResult?.url, cache: false }}
-              startInLoadingState
-              cacheEnabled={false}
-          /> :
-          <View
-          >
-            {messages.map((item, index) => (
-                <View
-                    key={index}
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: item.question !== '' ? 'flex-end' : 'flex-start',
-                      padding: 10,
-                      marginVertical: 5,
-                    }}
-                >
-                  <Text style={{
-                    backgroundColor: item.question !== '' ? '#007AFF' : '#E8E8E8',
-                    color: item.question !== '' ? 'white' : 'black',
-                    padding: 10,
-                    borderRadius: 15,
-                    maxWidth: '80%',
-                  }}>
-                    {item.question !== '' ? item.question : item.answer}
-                  </Text>
-                </View>
-            ))}
+      {connectResult?.url ? (
+        <WebView
+          source={{uri: connectResult?.url, cache: false}}
+          startInLoadingState
+          cacheEnabled={false}
+        />
+      ) : (
+        <View>
+          {messages.map((item, index) => (
+            <View
+              key={index}
+              style={{
+                flexDirection: 'row',
+                justifyContent:
+                  item.question !== '' ? 'flex-end' : 'flex-start',
+                padding: 10,
+                marginVertical: 5,
+              }}>
+              <Text
+                style={{
+                  backgroundColor: item.question !== '' ? '#007AFF' : '#E8E8E8',
+                  color: item.question !== '' ? 'white' : 'black',
+                  display: item.question !== '' ? 'flex' : 'none',
+                  padding: 10,
+                  borderRadius: 15,
+                  maxWidth: '80%',
+                }}>
+                {item.question !== '' ? item.question : item.answer}
+              </Text>
+            </View>
+          ))}
 
-            <SafeAreaView style={{flex: 1, justifyContent: 'flex-end'}}>
-              <View style={{paddingBottom: 10}}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <TextInput
-                      mode="outlined"
-                      placeholder="Type something"
-                      style={{flex: 1}}
-                      outlineStyle={{borderRadius: 25}}
-                      value={inputText}
-                      onChangeText={setInputText}
-                      onSubmitEditing={sendMessage}
-                      returnKeyType="send"
-                  />
-                  <IconButton
-                      icon="send"
-                      size={24}
-                      onPress={sendMessage}
-                  />
-                </View>
+          {/* <SafeAreaView style={{flex: 1}}> */}
+          {/* </SafeAreaView> */}
+
+          {/* <SafeAreaView style={{flex: 1, justifyContent: 'flex-end'}}>
+            <View style={{paddingBottom: 10}}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <TextInput
+                  mode="outlined"
+                  placeholder="Type something"
+                  style={{flex: 1}}
+                  outlineStyle={{borderRadius: 25}}
+                  value={inputText}
+                  onChangeText={setInputText}
+                  onSubmitEditing={sendMessage}
+                  returnKeyType="send"
+                />
+                <IconButton icon="send" size={24} onPress={sendMessage} />
               </View>
-            </SafeAreaView>
-          </View>}
+            </View>
+          </SafeAreaView> */}
+        </View>
+      )}
+      <SafeAreaView>
+        <InputField />
+      </SafeAreaView>
     </SafeAreaView>
   );
 }
@@ -177,32 +175,5 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 80,
     backgroundColor: '#31323d',
-    // justifyContent: 'center',
-  },
-  infoButton: {
-    color: '#FF6F61',
-    fontSize: 18,
-    textAlign: 'right',
-    marginBottom: 10,
-  },
-  input: {
-    height: 50,
-    borderColor: '#666',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    color: '#FFFFFF',
-    backgroundColor: '#333',
-  },
-  status: {
-    color: '#FF6F61',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  answer: {
-    color: '#A9A9A9',
-    textAlign: 'center',
-    marginTop: 20,
   },
 });

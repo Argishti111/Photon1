@@ -1,32 +1,58 @@
-import LightningIcon from '../Icons/LightningIcon';
 import SunIcon from '../Icons/SunIcon';
+import LightningIcon from '../Icons/LightningIcon';
+import LimitationIcon from '../Icons/LimitationIcon';
+import {View} from 'react-native';
 
 export const exampleMessages = [
   {
     id: 1,
-    messageTitle: 'Hello, World!',
-    messageLogo: <SunIcon />,
+    title: 'Examples',
+    logo: (
+      <View style={{marginTop: 10}}>
+        <SunIcon />
+      </View>
+    ),
     messages: [
-      {id: 1, message: 'This is a message'},
-      {id: 2, message: 'This is a reply'},
+      {id: 1, text: 'Сome up with which cryptocurrencies to buy'},
+      {id: 2, text: 'Where is it profitable to sell cryptocurrency'},
     ],
   },
   {
     id: 2,
-    messageTitle: 'Goodbye, World!',
-    messageLogo: <LightningIcon />,
+    title: 'Capabilities',
+    logo: (
+      <View
+        style={{
+          width: 42,
+          height: 42,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <LightningIcon />
+      </View>
+    ),
     messages: [
-      {id: 3, message: 'This is another message'},
-      {id: 4, message: 'This is another reply'},
+      {id: 3, text: 'Remembers what user said earlier in the conversation'},
+      {id: 4, text: 'Allows user to provide follow up corrections'},
     ],
   },
   {
     id: 3,
-    messageTitle: 'How are you?',
-    messageLogo: <SunIcon />,
+    title: 'Limitations',
+    logo: (
+      <View
+        style={{
+          width: 42,
+          height: 42,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <LimitationIcon />
+      </View>
+    ),
     messages: [
-      {id: 5, message: 'I am doing well!'},
-      {id: 6, message: 'Thank you for asking'},
+      {id: 5, text: 'May occasionally generate incorrect information'},
+      {id: 6, text: 'Limited knowledge of world and events after 2024'},
     ],
   },
   // Add more messages here...

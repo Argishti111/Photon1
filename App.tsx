@@ -12,7 +12,7 @@ import MinLogo from './src/Icons/MinLogo.tsx';
 
 function App(): React.JSX.Element {
   const RootStack = createNativeStackNavigator({
-    initialRouteName: 'Logo',
+    initialRouteName: 'Settings',
     screenOptions: {
       headerShown: false,
       headerStyle: {backgroundColor: '#31323d'},
