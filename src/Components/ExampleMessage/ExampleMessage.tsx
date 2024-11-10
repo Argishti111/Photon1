@@ -9,15 +9,27 @@ import React from 'react';
 
 type ExampleMessagesType = {
   messages: any[];
+  handleSelectMessage: (question: string) => void;
 };
 
-const Message = ({message}: {message: {id: number; text: string}}) => (
-  <TouchableOpacity style={styles.messageStyleContainer}>
+const Message = ({
+  message,
+  handlePressQuestion,
+}: {
+  message: {id: number; text: string};
+  handlePressQuestion: (message: string) => any;
+}) => (
+  <TouchableOpacity
+    onPress={() => handlePressQuestion(message.text)}
+    style={styles.messageStyleContainer}>
     <Text style={styles.messageStyle}>{message.text}</Text>
   </TouchableOpacity>
 );
 
-export default function ExampleMessage({messages}: ExampleMessagesType) {
+export default function ExampleMessage({
+  messages,
+  handleSelectMessage,
+}: ExampleMessagesType) {
   return (
     <ScrollView>
       {messages.map(message => (
@@ -31,7 +43,11 @@ export default function ExampleMessage({messages}: ExampleMessagesType) {
           <View style={styles.messagesContainer}>
             {message.messages.map(
               (message: {id: number; text: string}, index: number) => (
-                <Message key={index} message={message} />
+                <Message
+                  key={index}
+                  message={message}
+                  handlePressQuestion={handleSelectMessage}
+                />
               ),
             )}
           </View>

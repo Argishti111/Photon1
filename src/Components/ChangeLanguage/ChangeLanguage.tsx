@@ -1,27 +1,46 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React, {useState} from 'react';
 import ShowSelectElementsIcon from '../../Icons/ShowSelectElementsIcon';
+import {useTranslation} from 'react-i18next';
+import CheckedIcon from '../../Icons/CheckedIcon';
 
-export default function ChangeLanguage({title = 'Language'}) {
+export default function ChangeLanguage({title}: {title: string}) {
   const [showLanguageList, setShowLanguageList] = useState(false);
+  const {t, i18n} = useTranslation();
+
+  const languageList = [
+    {label: t('ENGLISH'), value: 'en', id: 1},
+    {label: t('FRENCH'), value: 'fr', id: 2},
+  ];
+
+  const languages: any = {
+    en: {title: 'English'},
+    fr: {title: 'Français'},
+  };
 
   const toggleLanguageList = () => {
     setShowLanguageList(!showLanguageList);
   };
 
-  const languageList = [
-    {id: 1, name: 'English'},
-    {id: 2, name: 'Spanish'},
-    {id: 3, name: 'French'},
-    // Add more languages as needed
-  ];
+  const changeLanguageItem = async (language: string) => {
+    await i18n.changeLanguage(language);
+    setShowLanguageList(false);
+  };
 
   return (
     <View>
       <TouchableOpacity onPress={toggleLanguageList} style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.selectedLanguageContainer}>
-          <Text style={styles.selectedLanguage}>English</Text>
+          <Text style={styles.selectedLanguage}>
+            {languages[i18n.language]?.title}
+          </Text>
           <View
             style={{
               transform: [{rotate: showLanguageList ? '90deg' : '0deg'}],
@@ -34,13 +53,11 @@ export default function ChangeLanguage({title = 'Language'}) {
         <View style={styles.languageListContainer}>
           {languageList.map(language => (
             <TouchableOpacity
+              style={styles.languageItemContainer}
               key={language.id}
-              onPress={() => {
-                // Handle language selection
-
-                toggleLanguageList();
-              }}>
-              <Text style={styles.languageItem}>{language.name}</Text>
+              onPress={() => changeLanguageItem(language.value)}>
+              <Text style={styles.languageItem}>{language.label}</Text>
+              {i18n.language === language.value && <CheckedIcon />}
             </TouchableOpacity>
           ))}
         </View>
@@ -75,14 +92,22 @@ const styles = StyleSheet.create({
   },
 
   languageListContainer: {
-    position: 'absolute',
-    top: 60,
-    backgroundColor: '#00000090',
     width: '100%',
     zIndex: 100,
     paddingVertical: 16,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    gap: 10,
+  },
+  languageItemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 10,
+    paddingVertical: 10,
+    marginLeft: 30,
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    width: Dimensions.get('window').width - 80,
   },
   languageItem: {
     color: '#FFF',

@@ -44,13 +44,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: 'solid',
     borderBottomColor: '#6D6D6D',
-    marginHorizontal:20,
-    paddingVertical: 16
+    marginHorizontal: 20,
+    paddingVertical: 16,
   },
   titleContainer: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
     marginLeft: 20,
     marginRight: 20,
   },

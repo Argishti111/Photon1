@@ -5,12 +5,22 @@ export const settingsStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#31323d',
     padding: 27,
-    // position: 'relative',
   },
   container: {
-    // flex: 1,
     backgroundColor: '#31323d',
     paddingTop: 110,
-    // position: 'relative',
+  },
+  aboutContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 16,
+    borderBottomColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    marginTop: 12,
+  },
+  about: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });

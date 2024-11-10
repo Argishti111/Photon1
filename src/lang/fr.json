@@ -1,0 +1,24 @@
+{
+    "translation": {
+        "ENGLISH": "Anglaise",
+        "FRENCH": "Français",
+        "PERSONAL_GPT": "GPT personnel",
+        "GET_STARTED": "Commencer",
+        "NEW_CHAT": "Nouveau chat",
+        "SETTINGS": "Paramètres",
+        "EXAMPLES": "Exemples",
+        "CAPABILITIES": "Capacités",
+        "LIMITATION": "Limites",
+        "TERMS_OF_USE": "Conditions d'utilisation",
+        "PRIVACY_POLICY": "Politique de confidentialité",
+        "LANGUAGE": "Langue",
+        "ABOUT": "À propos",
+        "SEND_MESSAGE_PLACEHOLDER": "| Envoyez un message ou appuyez pour enregistrer",
+        "СOME_UP_WITH_WHICH_CRIPTOCURRENCIES_TO_BUY": "Découvrez quelles crypto-monnaies acheter",
+        "WHERE_IS_IT_PROFITABLE_TO_SELL_CRYPTOCURRENCY": "Où est-il rentable de vendre des crypto-monnaies",
+        "REMRMBERS_WHAT_USER_SAID_EARLIER_IN_THE_CONVERSATION": "Se souvient de ce que l'utilisateur a dit plus tôt dans la conversation",
+        "ALLOWS_USER_TO_PROVIDE_FOLLOW_UP_CORRECTIONS": "Permet à l'utilisateur d'apporter des corrections de suivi",
+        "MAY_OCCASIONALLY_GENERATE_INCORRECT_INFORMATION": "Peut parfois générer des informations incorrectes",
+        "LIMITED_KNOWLEDGE_OF_WORLD_AND_EVENTS_AFTER_2024": "Connaissance limitée du monde et des événements après 2024"
+  }
+}

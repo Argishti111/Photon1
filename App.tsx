@@ -1,18 +1,16 @@
 import React from 'react';
-
-import {PaperProvider} from 'react-native-paper';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Provider} from 'react-redux';
 import {createStaticNavigation} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {HomeScreen, ChatScreen, SettingsScreen, LogoScreen} from './src/Pages';
 import TermsAndPrivacyPolicy from './src/Components/TermsOfConditions/TermsOfConditions';
-import SettingsIcon from './src/Icons/SettingsIcon.tsx';
-import {Text, TouchableOpacity, View} from 'react-native';
-import MinLogo from './src/Icons/MinLogo.tsx';
+import {ChatScreen, HomeScreen, LogoScreen, SettingsScreen} from './src/Pages';
+import store from './src/store';
 
 function App(): React.JSX.Element {
   const RootStack = createNativeStackNavigator({
-    initialRouteName: 'Settings',
+    initialRouteName: 'Chat',
     screenOptions: {
       headerShown: false,
       headerStyle: {backgroundColor: '#31323d'},
@@ -36,8 +34,10 @@ function App(): React.JSX.Element {
   return (
     <PaperProvider>
       <SafeAreaProvider>
-        <Navigation />
-        <TermsAndPrivacyPolicy />
+        <Provider store={store}>
+          <Navigation />
+          <TermsAndPrivacyPolicy />
+        </Provider>
       </SafeAreaProvider>
     </PaperProvider>
   );

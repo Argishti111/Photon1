@@ -5,9 +5,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SvgLogo from '../../Icons/Logo';
 import {logoScreenStyles} from './logoScreenStyles';
+import {useTranslation} from 'react-i18next';
 
 export default function LogoScreen() {
   const navigaton = useNavigation();
+  const {t} = useTranslation();
   const handleClickStartedBtn = () => navigaton.navigate('Chat' as never);
 
   return (
@@ -19,7 +21,7 @@ export default function LogoScreen() {
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
             style={logoScreenStyles.linearContainer}>
-            <Text style={logoScreenStyles.title}>Personal GPT</Text>
+            <Text style={logoScreenStyles.title}>{t('PERSONAL_GPT')}</Text>
           </LinearGradient>
         </View>
         <View>
@@ -35,7 +37,9 @@ export default function LogoScreen() {
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
           style={logoScreenStyles.startedBtnLinearContainer}>
-          <Text style={logoScreenStyles.getStartedBtnText}>Get Started</Text>
+          <Text style={logoScreenStyles.getStartedBtnText}>
+            {t('GET_STARTED')}
+          </Text>
         </LinearGradient>
       </TouchableOpacity>
     </SafeAreaView>

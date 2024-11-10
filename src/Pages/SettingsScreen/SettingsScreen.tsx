@@ -1,26 +1,27 @@
-import {
-  SafeAreaView,
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import {Header} from '../../Components';
-import MinLogo from '../../Icons/MinLogo';
-import BackIcon from '../../Icons/BackIcon';
-import {settingsStyles} from './settingsStyles';
 import ChangeLanguage from '../../Components/ChangeLanguage/ChangeLanguage';
+import BackIcon from '../../Icons/BackIcon';
+import MinLogo from '../../Icons/MinLogo';
+import {settingsStyles} from './settingsStyles';
+import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
 
 function SettingsScreen() {
   const navigation = useNavigation();
+  const {t} = useTranslation();
+  const inputText = useSelector((state: any) => state);
+  console.log(inputText, 'hhhhhhhhhhhhhhhhhhh');
+
   return (
     <SafeAreaView style={settingsStyles.generalContainer}>
       <Header
-        title="Settings"
+        title={t('SETTINGS')}
         leftIcon={
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Chat' as never)}>
             <BackIcon />
           </TouchableOpacity>
         }
@@ -31,7 +32,12 @@ function SettingsScreen() {
         }
       />
       <View style={settingsStyles.container}>
-        <ChangeLanguage />
+        <ChangeLanguage title={t('LANGUAGE')} />
+        <TouchableOpacity
+          onPress={() => {}}
+          style={settingsStyles.aboutContainer}>
+          <Text style={settingsStyles.about}>{t('ABOUT')}</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

@@ -1,23 +1,42 @@
+import React, {useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
-  View,
-  Text,
+  SafeAreaView,
   StyleSheet,
   TextInput,
-  SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import SendMessageIcon from '../../Icons/SendMessageIcon';
 
-export default function InputField() {
+type InputFieldProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+  onSubmit?: () => void;
+};
+
+export default function InputField({
+  value,
+  onChangeText,
+  onSubmit,
+}: InputFieldProps) {
+  const {t} = useTranslation();
+  const [isDisabled, setIsDisabled] = React.useState(true);
+  useEffect(() => {
+    setIsDisabled(!value);
+  }, [value]);
   return (
     <SafeAreaView style={styles.container}>
       {/* <Text style={styles.inputContainer}></Text> */}
       <TextInput
         style={styles.inputContainer}
-        placeholder="Send a message or tap to record"
+        placeholder={t('SEND_MESSAGE_PLACEHOLDER')}
+        value={value}
+        onChangeText={onChangeText}
       />
-      <TouchableOpacity style={styles.sendMessageIcon}>
+      <TouchableOpacity
+        disabled={isDisabled}
+        onPress={onSubmit}
+        style={[styles.sendMessageIcon, !isDisabled && styles.activeBtn]}>
         <SendMessageIcon />
       </TouchableOpacity>
     </SafeAreaView>
@@ -30,10 +49,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    // marginBottom: 10,
+    color: '#FFF',
   },
   inputContainer: {
     width: '80%',
+    maxHeight: 43,
     backgroundColor: 'rgba(217, 217, 217, 0.2)',
     borderRadius: 12,
     padding: 10,
@@ -43,5 +63,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 11,
+  },
+  activeBtn: {
+    backgroundColor: '#19B692',
   },
 });

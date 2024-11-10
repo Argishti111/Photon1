@@ -1,19 +1,26 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useTranslation} from 'react-i18next';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function TermsAndPrivacyPolicy() {
+  const {t} = useTranslation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.bodyContainer}>
-        <TouchableOpacity style={{width: 100}} onPress={() => {}}>
-          <Text style={styles.items}>Terms of use </Text>
+        <TouchableOpacity style={[]} onPress={() => {}}>
+          <Text style={styles.items}>{t('TERMS_OF_USE')} </Text>
         </TouchableOpacity>
-        <Text style={[styles.items, {width: 2}]}>| </Text>
-        <TouchableOpacity
-          style={{width: 100, marginLeft: 10}}
-          onPress={() => {}}>
-          <Text style={styles.items}>Privacy policy </Text>
-        </TouchableOpacity>
+        <View style={styles.termsOfConditions}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.items}>{t('PRIVACY_POLICY')} </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -27,9 +34,17 @@ const styles = StyleSheet.create({
 
   bodyContainer: {
     flexDirection: 'row',
+    paddingBottom: 20,
   },
 
   items: {
     color: '#797a81',
+  },
+  termsOfConditions: {
+    borderStyle: 'solid',
+    borderLeftWidth: 2,
+    paddingLeft: 8,
+    marginLeft: 4,
+    borderLeftColor: '#797a81',
   },
 });
