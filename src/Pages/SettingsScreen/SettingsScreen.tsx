@@ -1,16 +1,26 @@
-import {SafeAreaView, StatusBar, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
-import styles from '../../Styles.ts';
+import {useNavigation} from '@react-navigation/native';
 
-function SettingsScreen({route}: any) {
+function SettingsScreen() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar
-        barStyle={route.params.isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={route.params.backgroundStyle.backgroundColor}
-      />
-      <View style={styles.homeStyle}>
-        <Text>Settings</Text>
+      <View
+      // onPress={() => }
+      // style={styles.homeStyle}
+      >
+        <TouchableOpacity
+          style={{backgroundColor: 'red'}}
+          onPress={() => navigation.navigate('Chat' as never)}>
+          <Text>Settings</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

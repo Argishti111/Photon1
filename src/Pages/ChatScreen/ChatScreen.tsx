@@ -9,11 +9,19 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import {ExampleMessage, Header} from '../../Components';
+import SettingsIcon from '../../Icons/SettingsIcon';
+import MinLogo from '../../Icons/MinLogo';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+import {exampleMessages} from '../../data/data';
 
 const API_TOKEN = 'PXf6n09PH9oNjW16VZ5Dww6bLO';
 const API_BASE_URL = 'https://api.photonchatai.cloud';
 
-export default function ChatScreen({navigation}: any) {
+export default function ChatScreen() {
+  const navigation = useNavigation();
+
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [isChatReady, setIsChatReady] = useState(false);
@@ -64,32 +72,29 @@ export default function ChatScreen({navigation}: any) {
   //     setLoading(false);
   //   }
   // };
+  const handleClickSettings = () => navigation.navigate('Settings' as never);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Info')}>
-        <Text style={styles.infoButton}>ℹ️ Info</Text>
-      </TouchableOpacity>
-      {isChatReady ? (
-        <>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your question"
-            placeholderTextColor="#A9A9A9"
-            value={question}
-            onChangeText={setQuestion}
-          />
-          {/* <Button title="Send" onPress={sendQuestion} /> */}
-        </>
-      ) : (
-        <Text style={styles.status}>Chat is not ready yet...</Text>
-      )}
-      {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <Text style={styles.answer}>{answer}</Text>
-      )}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header
+        title="New Chat"
+        leftIcon={
+          <TouchableOpacity
+            onPress={handleClickSettings}
+            style={{alignItems: 'center'}}>
+            <SettingsIcon />
+            <Text style={{color: '#FFF', fontSize: 10}}>Settings</Text>
+          </TouchableOpacity>
+        }
+        rightIcon={
+          <View style={{alignItems: 'center', marginLeft: 10}}>
+            <MinLogo />
+          </View>
+        }
+      />
+
+      <ExampleMessage messages={exampleMessages} />
+    </SafeAreaView>
   );
 }
 
@@ -97,8 +102,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#1E1E1E',
-    justifyContent: 'center',
+    paddingTop: 80,
+    backgroundColor: '#31323d',
+    // justifyContent: 'center',
   },
   infoButton: {
     color: '#FF6F61',

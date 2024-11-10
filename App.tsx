@@ -6,22 +6,27 @@ import {createStaticNavigation} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {HomeScreen, ChatScreen, SettingsScreen, LogoScreen} from './src/Pages';
 import TermsAndPrivacyPolicy from './src/Components/TermsOfConditions/TermsOfConditions';
-import SettingsIcon from './src/Icons/SettingsIcon';
+import SettingsIcon from './src/Icons/SettingsIcon.tsx';
+import {Text, TouchableOpacity, View} from 'react-native';
+import MinLogo from './src/Icons/MinLogo.tsx';
 
 function App(): React.JSX.Element {
   const RootStack = createNativeStackNavigator({
-    initialRouteName: 'Logo',
-    screenOptions: {headerShown: false},
+    initialRouteName: 'Chat',
+    screenOptions: {
+      headerShown: false,
+      headerStyle: {backgroundColor: '#31323d'},
+      headerTitleStyle: {color: '#FFF', fontWeight: 'bold'},
+    },
     screens: {
       Logo: {screen: LogoScreen},
+      Home: {screen: HomeScreen},
       Chat: {
         screen: ChatScreen,
         options: {
           title: 'New Chat',
-          headerShown: true,
         },
       },
-      Home: {screen: HomeScreen},
       Settings: {screen: SettingsScreen},
     },
   });
