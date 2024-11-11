@@ -4,7 +4,7 @@ export const settingsStyles = StyleSheet.create({
   generalContainer: {
     flex: 1,
     backgroundColor: '#31323d',
-    padding: 27,
+    paddingVertical:20
   },
   container: {
     backgroundColor: '#31323d',

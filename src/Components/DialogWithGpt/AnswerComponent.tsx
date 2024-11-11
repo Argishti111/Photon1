@@ -7,7 +7,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 
 export default function AnswerComponent({answer}: {answer: string}) {
   const handleClickCopyText = () => {
-    Clipboard.setString('answer');
+    Clipboard.setString(answer);
     Alert.alert('Copied', 'Answer has been copied to clipboard');
   };
   return (

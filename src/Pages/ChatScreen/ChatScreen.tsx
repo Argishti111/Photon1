@@ -13,7 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 import {exampleMessagesEN, exampleMessagesFR} from '../../data/data';
 import WebView from 'react-native-webview';
 import {useTranslation} from 'react-i18next';
-import {useKeyboard} from '../../hooks/useKeyboard';
 import {useDispatch} from 'react-redux';
 import {handleChange} from '../../store';
 
@@ -62,7 +61,8 @@ export default function ChatScreen() {
     connectToChat();
   }, []);
 
-  const sendMessage = () => {
+  const sendMessage = (text = '') => {
+
     if (inputText.trim()) {
       setInputText('');
     }
@@ -72,7 +72,7 @@ export default function ChatScreen() {
     myHeaders.append('Authorization', 'Bearer PXf6n09PH9oNjW16VZ5Dww6bLO');
 
     const raw = JSON.stringify({
-      question: inputText,
+      question: typeof text === 'string' && text !== '' ? text : inputText,
     });
 
     const requestOptions = {
@@ -92,7 +92,7 @@ export default function ChatScreen() {
         setMessages([
           ...messages,
           {
-            question: inputText,
+            question: typeof text === 'string' && text !== '' ? text : inputText,
             answer: '',
           },
           {
@@ -108,7 +108,16 @@ export default function ChatScreen() {
 
   // @ts-ignore
   return (
+
     <SafeAreaView style={styles.container}>
+      { connectResult?.url ? (
+              <WebView
+                  source={{uri: connectResult?.url, cache: false}}
+                  startInLoadingState
+                  cacheEnabled={false}
+              />
+          ) :(
+              <>
       <Header
         title={t('NEW_CHAT')}
         leftIcon={
@@ -126,15 +135,7 @@ export default function ChatScreen() {
         }
       />
 
-      {/* <DialogWithGpt messages={messages} /> */}
 
-      {connectResult?.url ? (
-        <WebView
-          source={{uri: connectResult?.url, cache: false}}
-          startInLoadingState
-          cacheEnabled={false}
-        />
-      ) : (
         <View>
           {isShowDialog ? (
             <DialogWithGpt messages={messages} />
@@ -144,35 +145,16 @@ export default function ChatScreen() {
                 i18n.language === 'en' ? exampleMessagesEN : exampleMessagesFR
               }
               handleSelectMessage={(question: string) => {
-                sendMessage();
+                sendMessage(question);
                 // setInputText(question);
                 setShowDialog(true);
               }}
             />
           )}
 
-          {/* <SafeAreaView style={{flex: 1}}> */}
-          {/* </SafeAreaView> */}
 
-          {/* <SafeAreaView style={{flex: 1, justifyContent: 'flex-end'}}>
-            <View style={{paddingBottom: 10}}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TextInput
-                  mode="outlined"
-                  placeholder="Type something"
-                  style={{flex: 1}}
-                  outlineStyle={{borderRadius: 25}}
-                  value={inputText}
-                  onChangeText={setInputText}
-                  onSubmitEditing={sendMessage}
-                  returnKeyType="send"
-                />
-                <IconButton icon="send" size={24} onPress={sendMessage} />
-              </View>
-            </View>
-          </SafeAreaView> */}
         </View>
-      )}
+
       <SafeAreaView style={styles.inputContainer}>
         <InputField
           onChangeText={setInputText}
@@ -180,6 +162,8 @@ export default function ChatScreen() {
           onSubmit={sendMessage}
         />
       </SafeAreaView>
+              </>
+)}
     </SafeAreaView>
   );
 }
@@ -187,7 +171,7 @@ export default function ChatScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    paddingVertical: 20,
     paddingTop: 80,
     backgroundColor: '#31323d',
     justifyContent: 'space-between',

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SendMessageIcon from '../../Icons/SendMessageIcon';
+import {useSelector} from "react-redux";
 
 type InputFieldProps = {
   value: string;
@@ -30,10 +31,12 @@ export default function InputField({
       <TextInput
         style={styles.inputContainer}
         placeholder={t('SEND_MESSAGE_PLACEHOLDER')}
+        placeholderTextColor='white'
+        cursorColor='white'
         value={value}
         onChangeText={onChangeText}
       />
-      <TouchableOpacity
+        <TouchableOpacity
         disabled={isDisabled}
         onPress={onSubmit}
         style={[styles.sendMessageIcon, !isDisabled && styles.activeBtn]}>
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    color: '#FFF',
   },
   inputContainer: {
     width: '80%',
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(217, 217, 217, 0.2)',
     borderRadius: 12,
     padding: 10,
+    color: '#fff',
   },
   sendMessageIcon: {
     backgroundColor: '#53535C',

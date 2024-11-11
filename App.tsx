@@ -5,14 +5,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import TermsAndPrivacyPolicy from './src/Components/TermsOfConditions/TermsOfConditions';
-import {ChatScreen, HomeScreen, LogoScreen, SettingsScreen} from './src/Pages';
-import store from './src/store';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {ChatScreen, LogoScreen, SettingsScreen} from './src/Pages';
+import {Dimensions, SafeAreaView, StyleSheet} from 'react-native';
 import {InputField} from './src/Components';
+import store from "./src/store";
 
 function App(): React.JSX.Element {
   const RootStack = createNativeStackNavigator({
-    initialRouteName: 'Chat',
+    initialRouteName: 'Logo',
     screenOptions: {
       headerShown: false,
       headerStyle: {backgroundColor: '#31323d'},
@@ -20,7 +20,6 @@ function App(): React.JSX.Element {
     },
     screens: {
       Logo: {screen: LogoScreen},
-      Home: {screen: HomeScreen},
       Chat: {
         screen: ChatScreen,
         options: {
@@ -31,18 +30,20 @@ function App(): React.JSX.Element {
     },
   });
 
-  const [inputText, setInputText] = useState('');
-
   const Navigation = createStaticNavigation(RootStack);
 
   return (
     <PaperProvider>
+      <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.body}>
       <SafeAreaProvider>
         <Provider store={store}>
           <Navigation />
           <TermsAndPrivacyPolicy />
         </Provider>
       </SafeAreaProvider>
+        </SafeAreaView>
+      </SafeAreaView>
     </PaperProvider>
   );
 }
@@ -50,17 +51,13 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    paddingTop: 80,
-    paddingBottom: 50,
     backgroundColor: '#31323d',
+    alignItems:'center'
   },
-  inputContainer: {
-    zIndex: 2000,
-    backgroundColor: '#31323d',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-  },
+  body:{
+    flex:1,
+    width:Dimensions.get('window').width - 40,
+  }
 });
 
 export default App;

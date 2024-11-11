@@ -1598,6 +1598,27 @@ PODS:
     - React-logger (= 0.76.1)
     - React-perflogger (= 0.76.1)
     - React-utils (= 0.76.1)
+  - RNCClipboard (1.15.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNCMaskedView (0.1.11):
     - React
   - RNGestureHandler (2.20.2):
@@ -1867,6 +1888,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -2010,6 +2032,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCClipboard:
+    :path: "../node_modules/@react-native-clipboard/clipboard"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
@@ -2089,6 +2113,7 @@ SPEC CHECKSUMS:
   React-utils: 5362bd16a9563f9916e7a56c011ddc533507650f
   ReactCodegen: 865bafc5c17ec2181620ced1a32c39c38ab2951d
   ReactCommon: 422e364463f33e336fc4db196aeb50fd801d90d6
+  RNCClipboard: 8212ca9e8370d0e23bfb7f5a591380da5a63456d
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
   RNGestureHandler: fc5ce5bf284640d3af6431c3a5c3bc121e98d045
   RNReanimated: 77242c6d67416988a2fd9f5cf574bb3e60016362

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   isQuestionContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    padding: 10,
+    paddingVertical: 10,
     marginBottom: 5,
   },
   isQuestionText: {
@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
   isAnswerContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 10,
+    paddingVertical: 10,
   },
 });

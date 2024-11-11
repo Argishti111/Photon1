@@ -6,7 +6,6 @@ export const logoScreenStyles = StyleSheet.create({
     backgroundColor: '#31323d',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 27,
     // position: 'relative',
   },
   titleContainer: {
@@ -15,7 +14,6 @@ export const logoScreenStyles = StyleSheet.create({
   linearContainer: {
     width: 150,
     borderRadius: 100,
-    backgroundColor: '#4c63ff',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
@@ -39,7 +37,7 @@ export const logoScreenStyles = StyleSheet.create({
     marginBottom: 100,
   },
   startedBtnContainer: {
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width - 40,
     alignItems: 'center',
     marginBottom: 80,
   },

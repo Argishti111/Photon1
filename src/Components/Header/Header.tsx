@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Dimensions, SafeAreaView} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, Dimensions} from 'react-native';
 import React from 'react';
 
 type HeaderType = {
@@ -32,9 +32,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#31323d',
     position: 'absolute',
     top: 0,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width - 40,
     minHeight: 70,
     zIndex: 1000,
+    alignItems:'center',
   },
   bodyContainer: {
     flex: 1,
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: 'solid',
     borderBottomColor: '#6D6D6D',
-    marginHorizontal: 20,
     paddingVertical: 16,
   },
   titleContainer: {
