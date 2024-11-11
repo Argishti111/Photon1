@@ -173,6 +173,13 @@ export default function ChatScreen() {
           </SafeAreaView> */}
         </View>
       )}
+      <SafeAreaView style={styles.inputContainer}>
+        <InputField
+          onChangeText={setInputText}
+          value={inputText}
+          onSubmit={sendMessage}
+        />
+      </SafeAreaView>
     </SafeAreaView>
   );
 }
@@ -182,8 +189,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     paddingTop: 80,
-    paddingBottom: 50,
     backgroundColor: '#31323d',
+    justifyContent: 'space-between',
   },
   inputContainer: {
     zIndex: 2000,

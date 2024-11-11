@@ -13,7 +13,6 @@ function SettingsScreen() {
   const navigation = useNavigation();
   const {t} = useTranslation();
   const inputText = useSelector((state: any) => state);
-  console.log(inputText, 'hhhhhhhhhhhhhhhhhhh');
 
   return (
     <SafeAreaView style={settingsStyles.generalContainer}>

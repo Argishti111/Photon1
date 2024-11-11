@@ -40,13 +40,6 @@ function App(): React.JSX.Element {
       <SafeAreaProvider>
         <Provider store={store}>
           <Navigation />
-          <SafeAreaView style={styles.inputContainer}>
-            <InputField
-              onChangeText={setInputText}
-              value={inputText}
-              // onSubmit={sendMessage}
-            />
-          </SafeAreaView>
           <TermsAndPrivacyPolicy />
         </Provider>
       </SafeAreaProvider>

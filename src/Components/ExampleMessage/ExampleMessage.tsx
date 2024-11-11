@@ -4,6 +4,8 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
+  Dimensions,
 } from 'react-native';
 import React from 'react';
 
@@ -31,33 +33,39 @@ export default function ExampleMessage({
   handleSelectMessage,
 }: ExampleMessagesType) {
   return (
-    <ScrollView>
-      {messages.map(message => (
-        <React.Fragment key={message.id}>
-          <View style={styles.titleStyleContainer}>
-            {message.logo}
-            <Text key={message.id} style={styles.titleStyle}>
-              {message.title}
-            </Text>
-          </View>
-          <View style={styles.messagesContainer}>
-            {message.messages.map(
-              (message: {id: number; text: string}, index: number) => (
-                <Message
-                  key={index}
-                  message={message}
-                  handlePressQuestion={handleSelectMessage}
-                />
-              ),
-            )}
-          </View>
-        </React.Fragment>
-      ))}
-    </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {messages.map(message => (
+          <React.Fragment key={message.id}>
+            <View style={styles.titleStyleContainer}>
+              {message.logo}
+              <Text key={message.id} style={styles.titleStyle}>
+                {message.title}
+              </Text>
+            </View>
+            <View style={styles.messagesContainer}>
+              {message.messages.map(
+                (message: {id: number; text: string}, index: number) => (
+                  <Message
+                    key={index}
+                    message={message}
+                    handlePressQuestion={handleSelectMessage}
+                  />
+                ),
+              )}
+            </View>
+          </React.Fragment>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    // backgroundColor: 'red',
+    maxHeight: Dimensions.get('window').height * 0.7,
+  },
   titleStyleContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
