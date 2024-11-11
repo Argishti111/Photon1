@@ -1,16 +1,15 @@
 import React, {useRef} from 'react';
-import {Dimensions, FlatList} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import Message from './Message';
-import {useKeyboard} from '../../hooks/useKeyboard';
 
 export default function DialogWithGpt({messages}: {messages: any[]}) {
   const scrollViewRef = useRef<any>(null);
-  const keyboardHeight = useKeyboard();
-  const listHeight = Dimensions.get('window').height - keyboardHeight - 200;
 
   return (
+      <>
+      <Text style={{fontSize:30, color:'#fff', textAlign:'center', paddingBottom:5}}>Bonk Bot</Text>
     <FlatList
-      style={{height: listHeight, marginBottom: 10}}
+      style={{ marginBottom: 10}}
       ref={scrollViewRef}
       data={messages}
       keyExtractor={(item, index) => index.toString()}
@@ -19,5 +18,6 @@ export default function DialogWithGpt({messages}: {messages: any[]}) {
         scrollViewRef.current.scrollToEnd({animated: true})
       }
     />
+      </>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {createStaticNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -6,8 +6,7 @@ import {PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import TermsAndPrivacyPolicy from './src/Components/TermsOfConditions/TermsOfConditions';
 import {ChatScreen, LogoScreen, SettingsScreen} from './src/Pages';
-import {Dimensions, SafeAreaView, StyleSheet} from 'react-native';
-import {InputField} from './src/Components';
+import {Dimensions, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import store from "./src/store";
 
 function App(): React.JSX.Element {
@@ -30,6 +29,10 @@ function App(): React.JSX.Element {
     },
   });
 
+  useEffect(() => {
+    StatusBar.setBackgroundColor('#31323d');
+  }, []);
+  
   const Navigation = createStaticNavigation(RootStack);
 
   return (

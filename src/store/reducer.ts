@@ -2,6 +2,10 @@ import {HANDLE_REDUX_CHANGE} from './types';
 
 const initialState = {
   inputValue: '',
+  messages: [{
+    question: '',
+    answer: '',
+  }],
 };
 
 type HandleChangeType = {

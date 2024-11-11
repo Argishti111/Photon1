@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import {
   DialogWithGpt,
   ExampleMessage,
@@ -13,28 +13,42 @@ import {useNavigation} from '@react-navigation/native';
 import {exampleMessagesEN, exampleMessagesFR} from '../../data/data';
 import WebView from 'react-native-webview';
 import {useTranslation} from 'react-i18next';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {handleChange} from '../../store';
 import BurgerIcon from '../../Icons/BurgerIcon';
+import {useKeyboard} from "../../hooks/useKeyboard.tsx";
 
 export default function ChatScreen() {
   const navigation = useNavigation();
   const {t, i18n} = useTranslation();
-  const [messages, setMessages] = useState<any>([
-    {
-      question: '',
-      answer: '',
-    },
-    {
-      question: '',
-      answer: '',
-    },
-  ]);
+
   const [inputText, setInputText] = useState('');
   const [connectResult, setConnectResult] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState(false);
   const dispatch = useDispatch();
 
+  const keyboardHeight = useKeyboard();
+
+  let iosPadding = 0;
+  const andoidPadding = isShowDialog ? 100 : 50;
+
+  if(isShowDialog){
+    if(keyboardHeight){
+      iosPadding = keyboardHeight + 20
+    } else {
+      iosPadding = 100
+    }
+  }
+  else {
+    if(keyboardHeight){
+      iosPadding = keyboardHeight - 20
+    } else {
+      iosPadding = 50
+    }
+  }
+
+
+  const messages = useSelector((state: any) => state.reducer.messages)
   const connectToChat = () => {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -89,18 +103,19 @@ export default function ChatScreen() {
       })
       .then(result => {
         dispatch(handleChange('inputText', inputText));
-        setMessages([
-          ...messages,
-          {
-            question:
+        const messagesToAdd = [];
+        if(messages?.length > 0){
+          messagesToAdd.push(...messages)
+        }
+        dispatch(handleChange('messages', [...messagesToAdd, {
+          question:
               typeof text === 'string' && text !== '' ? text : inputText,
-            answer: '',
-          },
+          answer: '',
+        },
           {
             question: '',
             answer: result.answer,
-          },
-        ]);
+          }]))
       })
       .catch(error => console.error(error));
   };
@@ -108,12 +123,14 @@ export default function ChatScreen() {
   const handleClickSettings = () => navigation.navigate('Settings' as never);
 
   const handleClickBurgerIcon = () => {
+    dispatch(handleChange('messages', []))
     setIsShowDialog(false);
   };
 
   // @ts-ignore
   return (
-    <SafeAreaView style={styles.container}>
+
+    <SafeAreaView style={[styles.container, {paddingBottom: Platform.OS === 'ios' ? iosPadding : andoidPadding}]}>
       {connectResult?.url ? (
         <WebView
           source={{uri: connectResult?.url, cache: false}}
@@ -166,7 +183,7 @@ export default function ChatScreen() {
             )}
           </View>
 
-          <SafeAreaView style={styles.inputContainer}>
+          <SafeAreaView style={{position:'absolute', bottom: keyboardHeight && Platform.OS === 'ios' ? keyboardHeight -40 : 0, zIndex:5000, backgroundColor:'#31323d'}}>
             <InputField
               onChangeText={setInputText}
               value={inputText}
@@ -186,8 +203,7 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     backgroundColor: '#31323d',
     justifyContent: 'space-between',
-  },
-  inputContainer: {
+    paddingBottom:50,
     zIndex: 2000,
   },
 });

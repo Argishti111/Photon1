@@ -11,7 +11,7 @@ const resources = {
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
   resources,
-  lng: 'fr', // default language to use.
+  lng: 'en', // default language to use.
 });
 
 export default {i18n};

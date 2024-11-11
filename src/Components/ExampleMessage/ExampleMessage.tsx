@@ -5,7 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  Dimensions,
+ Platform,
 } from 'react-native';
 import React from 'react';
 
@@ -32,8 +32,14 @@ export default function ExampleMessage({
   messages,
   handleSelectMessage,
 }: ExampleMessagesType) {
+
+  let margin = 0;
+
+  if(Platform.OS === 'ios'){
+    margin = 20;
+  }
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, {marginBottom:margin}]}>
       <ScrollView>
         {messages.map(message => (
           <React.Fragment key={message.id}>
@@ -64,7 +70,7 @@ export default function ExampleMessage({
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: 'red',
-    maxHeight: Dimensions.get('window').height * 0.7,
+    // maxHeight: Dimensions.get('window').height * 0.7,
   },
   titleStyleContainer: {
     flexDirection: 'row',

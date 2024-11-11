@@ -7,12 +7,10 @@ import BackIcon from '../../Icons/BackIcon';
 import MinLogo from '../../Icons/MinLogo';
 import {settingsStyles} from './settingsStyles';
 import {useTranslation} from 'react-i18next';
-import {useSelector} from 'react-redux';
 
 function SettingsScreen() {
   const navigation = useNavigation();
   const {t} = useTranslation();
-  const inputText = useSelector((state: any) => state);
 
   return (
     <SafeAreaView style={settingsStyles.generalContainer}>
