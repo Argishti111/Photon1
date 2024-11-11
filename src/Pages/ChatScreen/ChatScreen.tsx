@@ -15,6 +15,7 @@ import WebView from 'react-native-webview';
 import {useTranslation} from 'react-i18next';
 import {useDispatch} from 'react-redux';
 import {handleChange} from '../../store';
+import BurgerIcon from '../../Icons/BurgerIcon';
 
 export default function ChatScreen() {
   const navigation = useNavigation();
@@ -31,7 +32,7 @@ export default function ChatScreen() {
   ]);
   const [inputText, setInputText] = useState('');
   const [connectResult, setConnectResult] = useState<any>();
-  const [isShowDialog, setShowDialog] = useState(false);
+  const [isShowDialog, setIsShowDialog] = useState(false);
   const dispatch = useDispatch();
 
   const connectToChat = () => {
@@ -62,7 +63,6 @@ export default function ChatScreen() {
   }, []);
 
   const sendMessage = (text = '') => {
-
     if (inputText.trim()) {
       setInputText('');
     }
@@ -80,7 +80,7 @@ export default function ChatScreen() {
       headers: myHeaders,
       body: raw,
     };
-    setShowDialog(true);
+    setIsShowDialog(true);
 
     // @ts-ignore
     fetch('https://api.photonchatai.cloud/ask', requestOptions)
@@ -92,7 +92,8 @@ export default function ChatScreen() {
         setMessages([
           ...messages,
           {
-            question: typeof text === 'string' && text !== '' ? text : inputText,
+            question:
+              typeof text === 'string' && text !== '' ? text : inputText,
             answer: '',
           },
           {
@@ -106,64 +107,74 @@ export default function ChatScreen() {
 
   const handleClickSettings = () => navigation.navigate('Settings' as never);
 
+  const handleClickBurgerIcon = () => {
+    setIsShowDialog(false);
+  };
+
   // @ts-ignore
   return (
-
     <SafeAreaView style={styles.container}>
-      { connectResult?.url ? (
-              <WebView
-                  source={{uri: connectResult?.url, cache: false}}
-                  startInLoadingState
-                  cacheEnabled={false}
-              />
-          ) :(
-              <>
-      <Header
-        title={t('NEW_CHAT')}
-        leftIcon={
-          <TouchableOpacity
-            onPress={handleClickSettings}
-            style={{alignItems: 'center'}}>
-            <SettingsIcon />
-            <Text style={{color: '#FFF', fontSize: 10}}>{t('SETTINGS')}</Text>
-          </TouchableOpacity>
-        }
-        rightIcon={
-          <View style={{alignItems: 'center', marginLeft: 10}}>
-            <MinLogo />
-          </View>
-        }
-      />
-
-
-        <View>
-          {isShowDialog ? (
-            <DialogWithGpt messages={messages} />
-          ) : (
-            <ExampleMessage
-              messages={
-                i18n.language === 'en' ? exampleMessagesEN : exampleMessagesFR
-              }
-              handleSelectMessage={(question: string) => {
-                sendMessage(question);
-                // setInputText(question);
-                setShowDialog(true);
-              }}
-            />
-          )}
-
-
-        </View>
-
-      <SafeAreaView style={styles.inputContainer}>
-        <InputField
-          onChangeText={setInputText}
-          value={inputText}
-          onSubmit={sendMessage}
+      {connectResult?.url ? (
+        <WebView
+          source={{uri: connectResult?.url, cache: false}}
+          startInLoadingState
+          cacheEnabled={false}
         />
-      </SafeAreaView>
-              </>
-)}
+      ) : (
+        <>
+          <Header
+            title={t('NEW_CHAT')}
+            leftIcon={
+              isShowDialog ? (
+                <TouchableOpacity
+                  onPress={handleClickBurgerIcon}
+                  style={{alignItems: 'center'}}>
+                  <BurgerIcon />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={handleClickSettings}
+                  style={{alignItems: 'center'}}>
+                  <SettingsIcon />
+                  <Text style={{color: '#FFF', fontSize: 10}}>
+                    {t('SETTINGS')}
+                  </Text>
+                </TouchableOpacity>
+              )
+            }
+            rightIcon={
+              <View style={{alignItems: 'center', marginLeft: 10}}>
+                <MinLogo />
+              </View>
+            }
+          />
+
+          <View>
+            {isShowDialog ? (
+              <DialogWithGpt messages={messages} />
+            ) : (
+              <ExampleMessage
+                messages={
+                  i18n.language === 'en' ? exampleMessagesEN : exampleMessagesFR
+                }
+                handleSelectMessage={(question: string) => {
+                  sendMessage(question);
+                  // setInputText(question);
+                  setIsShowDialog(true);
+                }}
+              />
+            )}
+          </View>
+
+          <SafeAreaView style={styles.inputContainer}>
+            <InputField
+              onChangeText={setInputText}
+              value={inputText}
+              onSubmit={sendMessage}
+            />
+          </SafeAreaView>
+        </>
+      )}
     </SafeAreaView>
   );
 }
