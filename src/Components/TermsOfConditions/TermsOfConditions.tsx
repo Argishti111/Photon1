@@ -1,6 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {
+  Linking,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -10,14 +11,17 @@ import {
 
 export default function TermsAndPrivacyPolicy() {
   const {t} = useTranslation();
+  const handleClickTermsAndPrivacyPolicy = () => {
+    Linking.openURL('https://google.com');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.bodyContainer}>
-        <TouchableOpacity style={[]} onPress={() => {}}>
+        <TouchableOpacity onPress={handleClickTermsAndPrivacyPolicy}>
           <Text style={styles.items}>{t('TERMS_OF_USE')} </Text>
         </TouchableOpacity>
         <View style={styles.termsOfConditions}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity onPress={handleClickTermsAndPrivacyPolicy}>
             <Text style={styles.items}>{t('PRIVACY_POLICY')} </Text>
           </TouchableOpacity>
         </View>
