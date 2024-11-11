@@ -173,13 +173,6 @@ export default function ChatScreen() {
           </SafeAreaView> */}
         </View>
       )}
-      <SafeAreaView style={styles.inputContainer}>
-        <InputField
-          onChangeText={setInputText}
-          value={inputText}
-          onSubmit={sendMessage}
-        />
-      </SafeAreaView>
     </SafeAreaView>
   );
 }
