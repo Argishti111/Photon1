@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   isAnswerText: {
     color: '#FFF',
     fontSize: 14,
+    fontFamily: 'ABeeZee-Regular',
   },
   footerContainer: {
     flexDirection: 'row',

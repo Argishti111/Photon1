@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 10,
     color: '#fff',
+    fontFamily: 'ABeeZee-Regular',
   },
   sendMessageIcon: {
     backgroundColor: '#53535C',

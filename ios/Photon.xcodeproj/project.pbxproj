@@ -15,6 +15,12 @@
 		5328C842C17851013F50CB08 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		7699B88040F8A987B510C191 /* libPods-Photon-PhotonTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Photon-PhotonTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		72D64ABCB89A4CBB932E1BB3 /* ABeeZee-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B3B2758BD4C1AA4BF9DAD /* ABeeZee-Italic.ttf */; };
+		7817B493D98E48DE81406C7A /* ABeeZee-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E09EFDE933544C984AD1224 /* ABeeZee-Regular.ttf */; };
+		3EC25696FD3647FDA79EECAD /* PTSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C421B55C1325472D88436225 /* PTSans-Bold.ttf */; };
+		275F09621C6541C98557905E /* PTSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B88A93750A14DD58120C877 /* PTSans-BoldItalic.ttf */; };
+		FC00107921774F8798AB833F /* PTSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D6143C405D746B699A79070 /* PTSans-Italic.ttf */; };
+		72808C954B6D4045A9D73E48 /* PTSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 59EB819A5D974B4A9AFFE711 /* PTSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +52,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Photon/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Photon-PhotonTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Photon-PhotonTests.release.xcconfig"; path = "Target Support Files/Pods-Photon-PhotonTests/Pods-Photon-PhotonTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7A4B3B2758BD4C1AA4BF9DAD /* ABeeZee-Italic.ttf */ = {isa = PBXFileReference; name = "ABeeZee-Italic.ttf"; path = "../assets/fonts/ABeeZee-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7E09EFDE933544C984AD1224 /* ABeeZee-Regular.ttf */ = {isa = PBXFileReference; name = "ABeeZee-Regular.ttf"; path = "../assets/fonts/ABeeZee-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C421B55C1325472D88436225 /* PTSans-Bold.ttf */ = {isa = PBXFileReference; name = "PTSans-Bold.ttf"; path = "../assets/fonts/PTSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B88A93750A14DD58120C877 /* PTSans-BoldItalic.ttf */ = {isa = PBXFileReference; name = "PTSans-BoldItalic.ttf"; path = "../assets/fonts/PTSans-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7D6143C405D746B699A79070 /* PTSans-Italic.ttf */ = {isa = PBXFileReference; name = "PTSans-Italic.ttf"; path = "../assets/fonts/PTSans-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		59EB819A5D974B4A9AFFE711 /* PTSans-Regular.ttf */ = {isa = PBXFileReference; name = "PTSans-Regular.ttf"; path = "../assets/fonts/PTSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				2643179162F44889B27573F1 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -150,6 +163,20 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		2643179162F44889B27573F1 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				7A4B3B2758BD4C1AA4BF9DAD /* ABeeZee-Italic.ttf */,
+				7E09EFDE933544C984AD1224 /* ABeeZee-Regular.ttf */,
+				C421B55C1325472D88436225 /* PTSans-Bold.ttf */,
+				3B88A93750A14DD58120C877 /* PTSans-BoldItalic.ttf */,
+				7D6143C405D746B699A79070 /* PTSans-Italic.ttf */,
+				59EB819A5D974B4A9AFFE711 /* PTSans-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -247,6 +274,12 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				5328C842C17851013F50CB08 /* PrivacyInfo.xcprivacy in Resources */,
+				72D64ABCB89A4CBB932E1BB3 /* ABeeZee-Italic.ttf in Resources */,
+				7817B493D98E48DE81406C7A /* ABeeZee-Regular.ttf in Resources */,
+				3EC25696FD3647FDA79EECAD /* PTSans-Bold.ttf in Resources */,
+				275F09621C6541C98557905E /* PTSans-BoldItalic.ttf in Resources */,
+				FC00107921774F8798AB833F /* PTSans-Italic.ttf in Resources */,
+				72808C954B6D4045A9D73E48 /* PTSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

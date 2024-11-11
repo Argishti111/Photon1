@@ -4,7 +4,7 @@ export const settingsStyles = StyleSheet.create({
   generalContainer: {
     flex: 1,
     backgroundColor: '#31323d',
-    paddingVertical:20
+    paddingVertical: 20,
   },
   container: {
     backgroundColor: '#31323d',
@@ -22,5 +22,6 @@ export const settingsStyles = StyleSheet.create({
   about: {
     color: '#FFF',
     fontSize: 16,
+    fontFamily: 'ABeeZee-Regular',
   },
 });

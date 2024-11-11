@@ -16,7 +16,7 @@ import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {handleChange} from '../../store';
 import BurgerIcon from '../../Icons/BurgerIcon';
-import {useKeyboard} from "../../hooks/useKeyboard.tsx";
+import {useKeyboard} from '../../hooks/useKeyboard.tsx';
 
 export default function ChatScreen() {
   const navigation = useNavigation();
@@ -32,23 +32,21 @@ export default function ChatScreen() {
   let iosPadding = 0;
   const andoidPadding = isShowDialog ? 100 : 50;
 
-  if(isShowDialog){
-    if(keyboardHeight){
-      iosPadding = keyboardHeight + 20
+  if (isShowDialog) {
+    if (keyboardHeight) {
+      iosPadding = keyboardHeight + 20;
     } else {
-      iosPadding = 100
+      iosPadding = 100;
     }
-  }
-  else {
-    if(keyboardHeight){
-      iosPadding = keyboardHeight - 20
+  } else {
+    if (keyboardHeight) {
+      iosPadding = keyboardHeight - 20;
     } else {
-      iosPadding = 50
+      iosPadding = 50;
     }
   }
 
-
-  const messages = useSelector((state: any) => state.reducer.messages)
+  const messages = useSelector((state: any) => state.reducer.messages);
   const connectToChat = () => {
     const myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -104,18 +102,23 @@ export default function ChatScreen() {
       .then(result => {
         dispatch(handleChange('inputText', inputText));
         const messagesToAdd = [];
-        if(messages?.length > 0){
-          messagesToAdd.push(...messages)
+        if (messages?.length > 0) {
+          messagesToAdd.push(...messages);
         }
-        dispatch(handleChange('messages', [...messagesToAdd, {
-          question:
-              typeof text === 'string' && text !== '' ? text : inputText,
-          answer: '',
-        },
-          {
-            question: '',
-            answer: result.answer,
-          }]))
+        dispatch(
+          handleChange('messages', [
+            ...messagesToAdd,
+            {
+              question:
+                typeof text === 'string' && text !== '' ? text : inputText,
+              answer: '',
+            },
+            {
+              question: '',
+              answer: result.answer,
+            },
+          ]),
+        );
       })
       .catch(error => console.error(error));
   };
@@ -123,14 +126,17 @@ export default function ChatScreen() {
   const handleClickSettings = () => navigation.navigate('Settings' as never);
 
   const handleClickBurgerIcon = () => {
-    dispatch(handleChange('messages', []))
+    dispatch(handleChange('messages', []));
     setIsShowDialog(false);
   };
 
   // @ts-ignore
   return (
-
-    <SafeAreaView style={[styles.container, {paddingBottom: Platform.OS === 'ios' ? iosPadding : andoidPadding}]}>
+    <SafeAreaView
+      style={[
+        styles.container,
+        {paddingBottom: Platform.OS === 'ios' ? iosPadding : andoidPadding},
+      ]}>
       {connectResult?.url ? (
         <WebView
           source={{uri: connectResult?.url, cache: false}}
@@ -153,7 +159,12 @@ export default function ChatScreen() {
                   onPress={handleClickSettings}
                   style={{alignItems: 'center'}}>
                   <SettingsIcon />
-                  <Text style={{color: '#FFF', fontSize: 10}}>
+                  <Text
+                    style={{
+                      color: '#FFF',
+                      fontSize: 10,
+                      fontFamily: 'ABeeZee-Regular',
+                    }}>
                     {t('SETTINGS')}
                   </Text>
                 </TouchableOpacity>
@@ -183,7 +194,16 @@ export default function ChatScreen() {
             )}
           </View>
 
-          <SafeAreaView style={{position:'absolute', bottom: keyboardHeight && Platform.OS === 'ios' ? keyboardHeight -40 : 0, zIndex:5000, backgroundColor:'#31323d'}}>
+          <SafeAreaView
+            style={{
+              position: 'absolute',
+              bottom:
+                keyboardHeight && Platform.OS === 'ios'
+                  ? keyboardHeight - 40
+                  : 10,
+              zIndex: 5000,
+              backgroundColor: '#31323d',
+            }}>
             <InputField
               onChangeText={setInputText}
               value={inputText}
@@ -203,7 +223,7 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     backgroundColor: '#31323d',
     justifyContent: 'space-between',
-    paddingBottom:50,
+    paddingBottom: 50,
     zIndex: 2000,
   },
 });

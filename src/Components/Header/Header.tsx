@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 40,
     minHeight: 70,
     zIndex: 1000,
-    alignItems:'center',
+    alignItems: 'center',
   },
   bodyContainer: {
     flex: 1,
@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'center',
     color: '#FFF',
+    fontFamily: 'ABeeZee-Regular',
+    letterSpacing: 1.5,
+    fontWeight: '400',
     fontSize: 21,
   },
 });

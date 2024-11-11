@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     maxWidth: '80%',
     fontSize: 15,
+    fontFamily: 'ABeeZee-Regular',
   },
 
   isAnswerContainer: {

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#FFF',
     fontSize: 16,
+    fontFamily: 'ABeeZee-Regular',
   },
   selectedLanguageContainer: {
     flexDirection: 'row',
@@ -112,5 +113,6 @@ const styles = StyleSheet.create({
   languageItem: {
     color: '#FFF',
     fontSize: 16,
+    fontFamily: 'ABeeZee-Regular',
   },
 });
