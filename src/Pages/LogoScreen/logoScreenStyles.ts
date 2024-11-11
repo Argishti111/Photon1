@@ -6,6 +6,7 @@ export const logoScreenStyles = StyleSheet.create({
     backgroundColor: '#31323d',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingVertical: 27,
     // position: 'relative',
   },
   titleContainer: {
@@ -44,7 +45,6 @@ export const logoScreenStyles = StyleSheet.create({
   startedBtnLinearContainer: {
     width: '80%',
     borderRadius: 12,
-
   },
   getStartedBtnText: {
     paddingVertical: 10,
