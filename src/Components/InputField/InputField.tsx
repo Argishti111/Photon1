@@ -9,15 +9,23 @@ import {
 import React from 'react';
 import SendMessageIcon from '../../Icons/SendMessageIcon';
 
-export default function InputField() {
+export default function InputField({
+    sendMessage = ()=>{},
+                                     setInputText= (text:string) =>{},
+    inputText = ''
+                                   }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* <Text style={styles.inputContainer}></Text> */}
       <TextInput
+          onChangeText={text => setInputText(text)}
         style={styles.inputContainer}
         placeholder="Send a message or tap to record"
+          onSubmitEditing={sendMessage}
+          returnKeyType="send"
+          value={inputText}
       />
-      <TouchableOpacity style={styles.sendMessageIcon}>
+      <TouchableOpacity style={styles.sendMessageIcon} onPress={()=>sendMessage()}>
         <SendMessageIcon />
       </TouchableOpacity>
     </SafeAreaView>
