@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   items: {
     color: '#797a81',
     letterSpacing: 2,
+    fontFamily: 'ABeeZee-Regular',
   },
   termsOfConditions: {
     borderStyle: 'solid',
